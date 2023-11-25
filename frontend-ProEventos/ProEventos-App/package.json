@@ -17,7 +17,7 @@
     "@angular/forms": "~12.2.0",
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
-    "@angular/router": "~12.2.0",
+    "@angular/router": "^12.2.17",
     "@fortawesome/fontawesome-free": "^6.4.2",
     "bootstrap": "^4.6.2",
     "ngx-bootstrap": "^8.0.0",
