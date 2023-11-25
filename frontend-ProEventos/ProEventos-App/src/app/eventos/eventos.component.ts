@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../_models/Evento';
+
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-eventos',
@@ -10,6 +13,8 @@ import { Evento } from '../_models/Evento';
 })
 export class EventosComponent implements OnInit {
 
+  // modalRef: BsModalRef;
+  modalRef = {} as BsModalRef;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
 
@@ -37,7 +42,11 @@ export class EventosComponent implements OnInit {
   }
 
 
-  constructor(private eventoService: EventoService) { }
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService,
+    private toastr: ToastrService
+    ) { }
 
   public ngOnInit(): void {
     this.getEventos();
@@ -58,6 +67,20 @@ export class EventosComponent implements OnInit {
     };
     this.eventoService.getEventos().subscribe(observer);
     
+  }
+
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+ 
+  confirm(): void {
+    this.modalRef.hide();
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+ 
+  decline(): void {
+
+    this.modalRef.hide();
   }
 
 }
